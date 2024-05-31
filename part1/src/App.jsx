@@ -43,23 +43,24 @@ const UI = () => {
   )
 }
 
-const Statistics = (props) =>{
+const Statistics = ({ good, neutral, bad, total, sum }) => {
+  let average = sum / total;
+  let positivePercentage = (good / total) * 100;
 
-  let sum = props.sum
-  let positive = props.good
-  let totalClicks = props.total
-  let average = sum/totalClicks
-  let postivePercentage = (positive/totalClicks)*100
+  console.log("This is the total: ",total)
 
-  return(
+  if(total<=0)
+    return <div><h1>No feedback given</h1></div>
+
+  return (
     <>
       <h2>Statistics</h2>
-      <p>Good: {props.good}</p>
-      <p>Neutral: {props.neutral}</p>
-      <p>Bad: {props.bad}</p>
-      <p>Total: {props.total}</p>
+      <p>Good: {good}</p>
+      <p>Neutral: {neutral}</p>
+      <p>Bad: {bad}</p>
+      <p>Total: {total}</p>
       <p>Average: {average}</p>
-      <p>Positive Percentage: {postivePercentage}% </p>
+      <p>Positive Percentage: {positivePercentage}% </p>
     </>
   )
 }
