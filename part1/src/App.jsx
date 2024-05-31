@@ -19,13 +19,10 @@ const App = () => {
   return (
     <div>
       <UI/>
-      <div>
       <Button onClick={handleGoodClicks} text ="Good +1"/>
       <Button onClick={handleNeutralClicks} text ="Neutral -_-"/>
       <Button onClick={handleBadClicks} text ="Bad +1"/>
-      </div>
-      <Stats good={clicks.good} neutral={clicks.neutral} bad={clicks.bad} total={clicks.total}/>
-      <DisplayAdvStats good={clicks.good} sum={clicks.sum} total={clicks.total}/>
+      <Statistics good={clicks.good} neutral={clicks.neutral} bad={clicks.bad} sum={clicks.sum} total={clicks.total}/>      
     </div>
   )
 }
@@ -46,7 +43,14 @@ const UI = () => {
   )
 }
 
-const Stats = (props) =>{
+const Statistics = (props) =>{
+
+  let sum = props.sum
+  let positive = props.good
+  let totalClicks = props.total
+  let average = sum/totalClicks
+  let postivePercentage = (positive/totalClicks)*100
+
   return(
     <>
       <h2>Statistics</h2>
@@ -54,20 +58,6 @@ const Stats = (props) =>{
       <p>Neutral: {props.neutral}</p>
       <p>Bad: {props.bad}</p>
       <p>Total: {props.total}</p>
-    </>
-  )
-}
-
-const DisplayAdvStats = (props) => {
-
-  let sum = props.sum
-  let positive = props.good
-  let totalClicks = props.total
-  let average = sum/totalClicks
-  let postivePercentage = positive/totalClicks
-
-  return(
-    <>
       <p>Average: {average}</p>
       <p>Positive Percentage: {postivePercentage}% </p>
     </>
