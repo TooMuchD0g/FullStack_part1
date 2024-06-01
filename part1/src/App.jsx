@@ -22,7 +22,17 @@ const App = () => {
       <Button onClick={handleGoodClicks} text ="Good +1"/>
       <Button onClick={handleNeutralClicks} text ="Neutral -_-"/>
       <Button onClick={handleBadClicks} text ="Bad +1"/>
-      <Statistics good={clicks.good} neutral={clicks.neutral} bad={clicks.bad} sum={clicks.sum} total={clicks.total}/>      
+
+      <h2>Statistics</h2>
+
+      {clicks.total <= 0 && <p>No Feedback given</p>}
+      {clicks.total > 0 && <StatisticsLine text="good" good={clicks.good}/>}
+      {clicks.total > 0 && <StatisticsLine text="neutral" neutral={clicks.neutral}/> }
+      {clicks.total > 0 && <StatisticsLine text="bad" bad={clicks.bad}/> }
+      {clicks.total > 0 && <StatisticsLine text="total" total={clicks.total}/> }
+      {clicks.total > 0 && <StatisticsLine text="average" sum={clicks.sum} total={clicks.total}/> }
+      {clicks.total > 0 && <StatisticsLine text="percentage" good={clicks.good} total={clicks.total}/>}
+
     </div>
   )
 }
@@ -47,11 +57,6 @@ const Statistics = ({ good, neutral, bad, total, sum }) => {
   let average = sum / total;
   let positivePercentage = (good / total) * 100;
 
-  console.log("This is the total: ",total)
-
-  if(total<=0)
-    return <div><h1>No feedback given</h1></div>
-
   return (
     <>
       <h2>Statistics</h2>
@@ -63,4 +68,23 @@ const Statistics = ({ good, neutral, bad, total, sum }) => {
       <p>Positive Percentage: {positivePercentage}% </p>
     </>
   )
+}
+
+const StatisticsLine = (props) => {
+
+  let average = props.sum / props.total;
+  let positivePercentage = (props.good / props.total) * 100;
+
+  if(props.text == "good")
+    return <p>Good: {props.good}</p>
+  if(props.text == "neutral")
+    return <p>Neutral: {props.neutral}</p>
+  if(props.text == "bad")
+    return <p>Bad: {props.bad}</p>
+  if(props.text == "total")
+    return <p>Total: {props.total}</p>
+  if(props.text == "average")
+    return <p>Average: {average}</p>
+  if(props.text == "percentage")
+    return <p>Positive: {positivePercentage}%</p>
 }
