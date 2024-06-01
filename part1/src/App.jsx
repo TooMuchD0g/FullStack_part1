@@ -15,6 +15,9 @@ const App = () => {
   const handleBadClicks = () =>
     setClicks({...clicks, sum: clicks.sum - 1, total: clicks.total + 1, bad: clicks.bad + 1})
 
+  let average = clicks.sum / clicks.total;
+  let positivePercentage = (clicks.good / clicks.total) * 100;
+
 
   return (
     <div>
@@ -25,13 +28,33 @@ const App = () => {
 
       <h2>Statistics</h2>
 
-      {clicks.total <= 0 && <p>No Feedback given</p>}
-      {clicks.total > 0 && <StatisticsLine text="good" good={clicks.good}/>}
-      {clicks.total > 0 && <StatisticsLine text="neutral" neutral={clicks.neutral}/> }
-      {clicks.total > 0 && <StatisticsLine text="bad" bad={clicks.bad}/> }
-      {clicks.total > 0 && <StatisticsLine text="total" total={clicks.total}/> }
-      {clicks.total > 0 && <StatisticsLine text="average" sum={clicks.sum} total={clicks.total}/> }
-      {clicks.total > 0 && <StatisticsLine text="percentage" good={clicks.good} total={clicks.total}/>}
+      <table>
+        <tr>
+          <td>Good</td>
+          <td>{clicks.good}</td>
+        </tr>
+        <tr>
+          <td>Neutral</td>
+          <td>{clicks.neutral}</td>
+        </tr>
+        <tr>
+          <td>Bad</td>
+          <td>{clicks.bad}</td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td>{clicks.total}</td>
+        </tr>
+        <tr>
+          <td>Average</td>
+          <td>{average}</td>
+        </tr>
+        <tr>
+          <td>Percentage</td>
+          <td>{positivePercentage}%</td>
+        </tr>
+      </table>
+
 
     </div>
   )
