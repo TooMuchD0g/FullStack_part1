@@ -28,13 +28,26 @@ const App = () => {
   }
 
   return (
-    console.log(rank),
     <div>
       <p>{anecdotes[selected]}</p>
       <p>Has {rank[selected]} votes</p>
       <button onClick={handleRankClick}>vote</button>
       <button onClick={handleClick}>next anecdote</button>
+      <MostPopularAnecdote anecdotes={anecdotes} rank={rank} />
     </div>
+  )
+}
+
+const MostPopularAnecdote = ({ rank, anecdotes}) => {
+
+  const maxIndex = rank.indexOf(Math.max(...rank))
+
+  return(
+    <>
+      <h1>Anecdote with most votes</h1>
+      <p>{anecdotes[maxIndex]}</p>
+      <>Has {Math.max(...rank)} votes</>
+    </>
   )
 }
 
